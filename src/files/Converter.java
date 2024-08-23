@@ -4,14 +4,14 @@ import java.util.ArrayList;
 public class Converter {
 	public Converter() {}
 	
-	public ArrayList<String> fileToArrayList(File arquivo) {
+	private String[][] fileToStringArray(File arquivo) {
 		ArrayList<String> linhas = new ArrayList<>();
 		
 		try {
 			FileReader reader = new FileReader(arquivo);
-			BufferedReader breader = new BufferedReader(reader);
+			BufferedReader br = new BufferedReader(reader);
 			String linha;
-			while((linha = breader.readLine()) != null ) {
+			while((linha = br.readLine()) != null ) {
 				linhas.add(linha);
 			}
 		} catch (FileNotFoundException e) {
@@ -22,26 +22,32 @@ public class Converter {
 			e.printStackTrace();
 		}
 		
-		return linhas;
+		ArrayList<String> parte1 = new ArrayList<>();
+		ArrayList<String> parte2 = new ArrayList<>();
+		
+		for (String s : linhas) {
+            String[] partes = s.split("	");
+            parte1.add(partes[0]);
+            parte2.add(partes[1]);
+        }
+		String[] vetor1 = parte1.toArray(new String[0]);
+		String[] vetor2 = parte2.toArray(new String[0]);
+		
+		String[][] vetores = new String[2][linhas.size()];
+		vetores[0] = vetor1;
+		vetores[1] = vetor2;
+		
+		return vetores;
 	}
 		
 		
-	public ArrayList<String> ToNotes(ArrayList<String> BruteAnswers){
-		ArrayList<char[]> Answers = new ArrayList<char[]>();
-		ArrayList<String> Names = new ArrayList<String>();
-		
-		for(String l : BruteAnswers) {
-			for(int i = 0; i < 10; i++) {
-				char[] answer = new char[10]; 
-				answer[i] = l.charAt(i);
-				Answers.add(answer);
-			}
-			
-		}
+	public String[][] ToNotes(File arquivo){
+		int RANGE_OF_ANSWER = 10;
+		String[][] BruteAnswers = fileToStringArray(arquivo);
 		
 		
 		
-		return Answers;
+		
 	}
 	
 
