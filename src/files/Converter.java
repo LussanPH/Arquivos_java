@@ -1,4 +1,4 @@
-package files;
+package Trabalho.files;
 import java.io.*;
 import java.util.ArrayList;
 public class Converter {
@@ -10,8 +10,9 @@ public class Converter {
 			BufferedReader br = new BufferedReader(new FileReader(arquivo));
 			String linha;
 			while((linha = br.readLine()) != null ) {
-				linhas.add(linha);
+				linhas.add(linha);	
 			}
+			br.close();/*SÓ FECHEI OS BR */
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -24,7 +25,6 @@ public class Converter {
             matriz[0][i] = partes[0];
             matriz[1][i] = partes[1];
         }
-        
         return matriz;
 	}
 		
@@ -35,6 +35,7 @@ public class Converter {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(respostas));
 			Answers = br.readLine();
+			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
